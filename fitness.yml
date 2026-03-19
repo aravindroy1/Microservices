@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aravind-ns
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitness-deployment
+  namespace: aravind-ns
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: fitness-app
+  
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: fitness-app
+    spec:
+      containers:
+        - name: fitness-container
+          image: muralisocial123/fitness-app:v1.0.1
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fitness-service
+  namespace: aravind-ns
+spec:
+  selector:
+    app: fitness-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: ClusterIP
+  

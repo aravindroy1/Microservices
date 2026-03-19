@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction-deployment
+  namespace: aravind-ns
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: transaction-app
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  
+  template:
+    metadata:
+      labels:
+        app: transaction-app
+    spec:
+      containers:
+        - name: transaction-container
+          image: muralisocial123/transaction-app:v1.0.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: transaction-service
+  namespace: aravind-ns
+spec:
+  selector:
+    app: transaction-app
+
+  ports: 
+      - protocol: TCP
+        port: 80
+        targetPort: 3000
+  type: ClusterIP

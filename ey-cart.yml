@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ey-cart-deployment
+  namespace: aravind-ns
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: ey-cart-app
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  
+  template:
+    metadata:
+      labels:
+        app: ey-cart-app
+    spec:
+      containers:
+        - name: ey-cart-container
+          image: muralisocial123/ey-cart:v1.1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ey-cart-service
+  namespace: aravind-ns
+spec:
+  selector:
+    app: ey-cart-app
+
+  ports: 
+      - protocol: TCP
+        port: 80
+        targetPort: 3000
+  type: ClusterIP
