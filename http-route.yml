@@ -9,7 +9,6 @@ spec:
 
   rules:
 
-  # 👉 ey-cart
   - matches:
     - path:
         type: PathPrefix
@@ -24,7 +23,6 @@ spec:
     - name: ey-cart-service
       port: 80
 
-  # 👉 fitness
   - matches:
     - path:
         type: PathPrefix
@@ -39,7 +37,6 @@ spec:
     - name: fitness-service
       port: 80
 
-  # 👉 flip
   - matches:
     - path:
         type: PathPrefix
@@ -54,7 +51,6 @@ spec:
     - name: flip-service
       port: 80
 
-  # 👉 kyndrl
   - matches:
     - path:
         type: PathPrefix
@@ -69,7 +65,6 @@ spec:
     - name: kyndrl-service
       port: 80
 
-  # 👉 transaction
   - matches:
     - path:
         type: PathPrefix
