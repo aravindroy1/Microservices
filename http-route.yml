@@ -1,0 +1,55 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: aravind-route
+  namespace: aravind-ns
+spec:
+  parentRefs:
+  - name: aravind-gateway
+
+  rules:
+
+  # 👉 ey-cart
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /cart
+    backendRefs:
+    - name: ey-cart-service
+      port: 80
+
+  # 👉 fitness
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /fitness
+    backendRefs:
+    - name: fitness-service
+      port: 80
+
+  # 👉 flip
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /flip
+    backendRefs:
+    - name: flip-service
+      port: 80
+
+  # 👉 kyndrl
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /kyndrl
+    backendRefs:
+    - name: kyndrl-service
+      port: 80
+
+  # 👉 transaction
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /transaction
+    backendRefs:
+    - name: transaction-service
+      port: 80
