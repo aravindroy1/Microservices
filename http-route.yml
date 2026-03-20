@@ -14,6 +14,12 @@ spec:
     - path:
         type: PathPrefix
         value: /cart
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     backendRefs:
     - name: ey-cart-service
       port: 80
@@ -23,6 +29,12 @@ spec:
     - path:
         type: PathPrefix
         value: /fitness
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     backendRefs:
     - name: fitness-service
       port: 80
@@ -32,6 +44,12 @@ spec:
     - path:
         type: PathPrefix
         value: /flip
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     backendRefs:
     - name: flip-service
       port: 80
@@ -41,6 +59,12 @@ spec:
     - path:
         type: PathPrefix
         value: /kyndrl
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     backendRefs:
     - name: kyndrl-service
       port: 80
@@ -50,6 +74,12 @@ spec:
     - path:
         type: PathPrefix
         value: /transaction
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     backendRefs:
     - name: transaction-service
       port: 80
