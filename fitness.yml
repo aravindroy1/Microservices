@@ -10,7 +10,7 @@ metadata:
   name: fitness-deployment
   namespace: aravind-ns
 spec:
-  replicas: 3
+  replicas: 2
 
   selector:
     matchLabels:
@@ -37,8 +37,8 @@ spec:
               memory: "512Mi"
               cpu: "500m"
             requests:
-              memory: "256Mi"
-              cpu: "250m"
+              memory: "128Mi"
+              cpu: "100m"
 
 ---
 apiVersion: v1
